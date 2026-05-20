@@ -1,0 +1,122 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Debug Eureka",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/eureka",
+      "mainClass": "cl.nike.eureka.TiendaEurekaApplication",
+      "projectName": "cl-nike-eureka",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-marca",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-marca",
+      "mainClass": "cl.nike.marca.TiendaMarcaApplication",
+      "projectName": "cl-nike-marca",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-modelo",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-modelo",
+      "mainClass": "cl.nike.modelo.TiendaModeloApplication",
+      "projectName": "cl-nike-modelo",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-categoria",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-categoria",
+      "mainClass": "cl.nike.categoria.TiendaCategoriaApplication",
+      "projectName": "cl-nike-categoria",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-zapatilla",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-zapatilla",
+      "mainClass": "cl.nike.zapatilla.TiendaZapatillaApplication",
+      "projectName": "cl-nike-zapatilla",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-cliente",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-cliente",
+      "mainClass": "cl.nike.cliente.TiendaClienteApplication",
+      "projectName": "cl-nike-cliente",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-vendedor",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-vendedor",
+      "mainClass": "cl.nike.vendedor.TiendaVendedorApplication",
+      "projectName": "cl-nike-vendedor",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-venta",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-venta",
+      "mainClass": "cl.nike.venta.TiendaVentaApplication",
+      "projectName": "cl-nike-venta",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-detallevta",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-detallevta",
+      "mainClass": "cl.nike.detallevta.TiendaDetallevtaApplication",
+      "projectName": "cl-nike-detallevta",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-proveedor",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-proveedor",
+      "mainClass": "cl.nike.proveedor.TiendaProveedorApplication",
+      "projectName": "cl-nike-proveedor",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-compra",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-compra",
+      "mainClass": "cl.nike.compra.TiendaCompraApplication",
+      "projectName": "cl-nike-compra",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug All Services",
+      "configurations": [
+        "Debug Eureka",
+        "Debug ms-marca",
+        "Debug ms-modelo",
+        "Debug ms-categoria",
+        "Debug ms-zapatilla",
+        "Debug ms-cliente",
+        "Debug ms-vendedor",
+        "Debug ms-venta",
+        "Debug ms-detallevta",
+        "Debug ms-proveedor",
+        "Debug ms-compra"
+      ]
+    }
+  ]
+}

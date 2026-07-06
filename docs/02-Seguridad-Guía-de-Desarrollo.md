@@ -1,6 +1,6 @@
 # Guía de Desarrollo: Implementación de Seguridad JWT
 
-Esta guía secuencial detalla cómo transformar el código base de la plataforma "Biblioteca-Kafka" para incorporar autenticación y autorización mediante JSON Web Tokens (JWT) y Spring Security.
+Esta guía secuencial detalla cómo transformar el código base de la plataforma "Nike-Kafka" para incorporar autenticación y autorización mediante JSON Web Tokens (JWT) y Spring Security.
 
 ## Etapa 1: Comprender la Arquitectura de Seguridad
 
@@ -10,7 +10,7 @@ Antes de escribir código, debemos comprender dos conceptos fundamentales:
 
 **Matriz de Permisos del Sistema:**
 - **Cliente:** Sólo puede leer datos (libros, recursos).
-- **Bibliotecario:** Puede leer y modificar datos del catálogo y recursos (pero no usuarios).
+- **Nikerio:** Puede leer y modificar datos del catálogo y recursos (pero no usuarios).
 - **Administrador:** Control total sobre todos los microservicios.
 
 ---
@@ -19,7 +19,7 @@ Antes de escribir código, debemos comprender dos conceptos fundamentales:
 
 ¿Por qué? Necesitamos librerías para manejar criptografía (Spring Security) y generación/validación de tokens (JJWT).
 
-**Paso 2.1: Actualizar el archivo `pom.xml` padre (`c:\32-biblioteca-kafka\pom.xml`)**
+**Paso 2.1: Actualizar el archivo `pom.xml` padre (`c:\32-nike-kafka\pom.xml`)**
 Defina las versiones globales. Agregue dentro del bloque `<properties>`:
 ```xml
 <jjwt.version>0.12.6</jjwt.version>
@@ -42,7 +42,7 @@ Y dentro de `<dependencyManagement><dependencies>`:
 <!-- ... (repetir para jjwt-impl y jjwt-jackson) ... -->
 ```
 
-**Paso 2.2: Actualizar `common/pom.xml` (`c:\32-biblioteca-kafka\common\pom.xml`)**
+**Paso 2.2: Actualizar `common/pom.xml` (`c:\32-nike-kafka\common\pom.xml`)**
 Como todo microservicio depende de `common`, añadir aquí las dependencias garantiza que se propaguen.
 Agregue en `<dependencies>`:
 ```xml
@@ -121,7 +121,7 @@ jwt:
 ## Etapa 5: Configurar `ms-catalogo` como Servidor de Recursos
 
 **Paso 5.1: Configuración de Seguridad**
-Cree `SecurityConfig.java`. La estructura es similar, excepto que no se habilitan rutas `/auth`. Solo permita accesos públicos en `/actuator/**` y asigne reglas de escritura a los roles "Administrador" y "Bibliotecario".
+Cree `SecurityConfig.java`. La estructura es similar, excepto que no se habilitan rutas `/auth`. Solo permita accesos públicos en `/actuator/**` y asigne reglas de escritura a los roles "Administrador" y "Nikerio".
 
 **Paso 5.2: Variables de entorno YAML**
 Copie estrictamente el mismo bloque `jwt` configurado en `ms-usuarios` dentro de `application.yml` en `ms-catalogo`. Sin la misma clave secreta, las firmas fallarán al verificar.
@@ -140,7 +140,7 @@ Repita el mismo procedimiento ejecutado en la Etapa 5, adaptando las rutas `/api
 Dado que las contraseñas antiguas estaban en texto plano y hemos migrado, las validaciones fallarán irremediablemente.
 
 **Paso 7.1: Archivo SQL Inicial**
-Edite `c:\32-biblioteca-kafka\init-multi-db\01-usuarios.sql`.
+Edite `c:\32-nike-kafka\init-multi-db\01-usuarios.sql`.
 *   Cambie la definición de la tabla: `password VARCHAR(255) NOT NULL,`
 *   Actualice todos los `INSERT` de la contraseña `'Biblio@2026'` por su equivalencia segura con BCrypt (ej: `$2b$10$...`).
 

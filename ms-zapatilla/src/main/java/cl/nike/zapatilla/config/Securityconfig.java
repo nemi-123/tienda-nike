@@ -50,7 +50,7 @@ public class Securityconfig {
 
                 // Consulta de zapatillas/catálogo: Accesible por todos los roles autenticados
                 .requestMatchers(HttpMethod.GET, "/api/v1/zapatillas/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Modificaciones del catálogo (Crear, Actualizar, Eliminar) restringidos al Administrador
                 .requestMatchers(HttpMethod.POST, "/api/v1/zapatillas/**").hasAnyRole("Administrador")

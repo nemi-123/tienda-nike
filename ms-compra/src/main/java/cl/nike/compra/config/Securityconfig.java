@@ -51,7 +51,7 @@ public class Securityconfig {
 
                 // Historial/Detalle de compras: visible por cualquier rol autenticado
                 .requestMatchers(HttpMethod.GET, "/api/v1/compras/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Generar una compra: típicamente Clientes y Administradores
                 .requestMatchers(HttpMethod.POST, "/api/v1/compras/**")

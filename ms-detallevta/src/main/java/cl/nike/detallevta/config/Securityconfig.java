@@ -52,7 +52,7 @@ public class Securityconfig {
 
                 // Consulta de detalles de venta: Accesible por todos los roles autenticados
                 .requestMatchers(HttpMethod.GET, "/api/v1/detallevta/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Registro de detalles de venta: Típicamente por Administradores o Clientes al comprar
                 .requestMatchers(HttpMethod.POST, "/api/v1/detallevta/**")

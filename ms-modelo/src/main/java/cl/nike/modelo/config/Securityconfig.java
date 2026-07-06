@@ -50,7 +50,7 @@ public class Securityconfig {
 
                 // Consulta de modelos: Accesible por todos los roles autenticados
                 .requestMatchers(HttpMethod.GET, "/api/v1/modelos/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Modificaciones, creación y eliminación restringidas únicamente al rol Administrador
                 .requestMatchers(HttpMethod.POST, "/api/v1/modelos/**").hasAnyRole("Administrador")

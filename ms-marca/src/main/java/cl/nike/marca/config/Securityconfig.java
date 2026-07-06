@@ -61,7 +61,7 @@ public class Securityconfig {
 
                 // Listar o ver marcas: Accesible por cualquier usuario autenticado (Clientes, Administradores, etc.)
                 .requestMatchers(HttpMethod.GET, "/api/v1/marcas/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Mantenedores de Marcas (Crear, Modificar, Eliminar): Exclusivo Administradores
                 .requestMatchers(HttpMethod.POST, "/api/v1/marcas/**").hasAnyRole("Administrador")

@@ -189,7 +189,7 @@ setlocal
 cls
 echo.
 echo ============================================
-echo   Biblioteca - MENU PRINCIPAL
+echo   Nike - MENU PRINCIPAL
 echo ============================================
 echo.
 echo   [1] Iniciar todos los servicios (dev)
@@ -991,7 +991,7 @@ echo   PostgreSQL:     localhost:5433
 echo   -----------------------------------------------
 echo.
 echo   Pruebas con Postman:
-echo   Importar: postman\3-Biblioteca-API.postman_collection_dockers.json
+echo   Importar: postman\3-Nike-API.postman_collection_dockers.json
 echo   1. Ejecutar "Login - Administrador"
 echo   2. Probar endpoints de Libros, Usuarios, Recursos
 echo.
@@ -13804,7 +13804,7 @@ mvn -f ms-vendedor spring-boot:run
 
 {
   // ============================================================
-  // Tareas de VS Code para el proyecto Biblioteca
+  // Tareas de VS Code para el proyecto Nike
   // ============================================================
   // Tarea única: esperar a que Eureka Server esté listo.
   // Los microservicios y el gateway la usan como preLaunchTask
@@ -13893,7 +13893,7 @@ mvn -f ms-vendedor spring-boot:run
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>cl.nike.gateway.BibliotecaGatewayApplication</mainClass>
+                    <mainClass>cl.nike.gateway.NikeGatewayApplication</mainClass>
                 </configuration>
             </plugin>
             
@@ -13924,7 +13924,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * Clase principal del API Gateway del proyecto Biblioteca de Nike.
+ * Clase principal del API Gateway del proyecto Nike de Nike.
  *
  * Esta aplicación actúa como punto de entrada único (Single Entry Point) para
  * todos los microservicios del sistema. Todas las peticiones de los clientes
@@ -13966,7 +13966,7 @@ public class tiendaGatewayApplication {
 # API GATEWAY - Configuración principal (Global)
 # ============================================================
 # Este archivo configura el API Gateway como punto de entrada único
-# para todos los microservicios del proyecto Biblioteca.
+# para todos los microservicios del proyecto Nike.
 # Puerto: 9000
 # Todas las peticiones llegan aquí y son enrutadas al microservicio
 # correspondiente según el path de la URL.
@@ -14151,7 +14151,7 @@ info:
   app:
     name: ${spring.application.name}
     version: "@project.version@"
-    description: "API Gateway - Punto de entrada único para los microservicios de Biblioteca"
+    description: "API Gateway - Punto de entrada único para los microservicios de Nike"
 
 # ============================================================
 # Configuración de logging
@@ -14236,7 +14236,7 @@ management:
 # API GATEWAY - Configuración principal (Global)
 # ============================================================
 # Este archivo configura el API Gateway como punto de entrada único
-# para todos los microservicios del proyecto Biblioteca.
+# para todos los microservicios del proyecto Nike.
 # Puerto: 9000
 # Todas las peticiones llegan aquí y son enrutadas al microservicio
 # correspondiente según el path de la URL.
@@ -14421,7 +14421,7 @@ info:
   app:
     name: ${spring.application.name}
     version: "0.0.1-SNAPSHOT"
-    description: "API Gateway - Punto de entrada único para los microservicios de Biblioteca"
+    description: "API Gateway - Punto de entrada único para los microservicios de Nike"
 
 # ============================================================
 # Configuración de logging
@@ -15354,7 +15354,7 @@ version=0.0.1-SNAPSHOT
 
 # Implementación de Seguridad con JWT
 
-Este documento detalla la implementación de seguridad basada en JSON Web Tokens (JWT) en el proyecto Biblioteca-Kafka.
+Este documento detalla la implementación de seguridad basada en JSON Web Tokens (JWT) en el proyecto Nike-Kafka.
 
 ## 1. Introducción a JWT
 
@@ -15460,8 +15460,8 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/actuator/**").permitAll()
-            .requestMatchers(HttpMethod.GET, "/api/v1/libros/**").hasAnyRole("Administrador", "Bibliotecario", "Cliente")
-            .requestMatchers(HttpMethod.POST, "/api/v1/libros/**").hasAnyRole("Administrador", "Bibliotecario")
+            .requestMatchers(HttpMethod.GET, "/api/v1/libros/**").hasAnyRole("Administrador", "Nikerio", "Cliente")
+            .requestMatchers(HttpMethod.POST, "/api/v1/libros/**").hasAnyRole("Administrador", "Nikerio")
             // ... otras reglas ...
             .anyRequest().authenticated()
         )
@@ -15546,13 +15546,13 @@ jwt:
 | Microservicio   | Endpoint                         | Método HTTP      | Roles Permitidos                      |
 | :-------------- | :------------------------------- | :---------------- | :------------------------------------ |
 | `ms-usuarios` | `/api/v1/auth/**`              | ALL               | Público (Todos)                      |
-| `ms-usuarios` | `/api/v1/usuarios/**`          | GET               | Administrador, Bibliotecario          |
+| `ms-usuarios` | `/api/v1/usuarios/**`          | GET               | Administrador, Nikerio          |
 | `ms-usuarios` | `/api/v1/usuarios/**`          | POST, PUT, DELETE | Administrador                         |
-| `ms-catalogo` | `/api/v1/libros/**`            | GET               | Administrador, Bibliotecario, Cliente |
-| `ms-catalogo` | `/api/v1/libros/**`            | POST, PUT, DELETE | Administrador, Bibliotecario          |
-| `ms-recursos` | `/api/v1/recursos/**`          | GET               | Administrador, Bibliotecario, Cliente |
-| `ms-recursos` | `/api/v1/recursos/**`          | POST, PUT, DELETE | Administrador, Bibliotecario          |
-| `ms-recursos` | `/api/v1/libros-proyeccion/**` | GET               | Administrador, Bibliotecario, Cliente |
+| `ms-catalogo` | `/api/v1/libros/**`            | GET               | Administrador, Nikerio, Cliente |
+| `ms-catalogo` | `/api/v1/libros/**`            | POST, PUT, DELETE | Administrador, Nikerio          |
+| `ms-recursos` | `/api/v1/recursos/**`          | GET               | Administrador, Nikerio, Cliente |
+| `ms-recursos` | `/api/v1/recursos/**`          | POST, PUT, DELETE | Administrador, Nikerio          |
+| `ms-recursos` | `/api/v1/libros-proyeccion/**` | GET               | Administrador, Nikerio, Cliente |
 | Todos           | `/actuator/**`                 | ALL               | Público (Monitoreo)                  |
 
 ## 6. Cómo probar con Postman
@@ -15562,7 +15562,7 @@ Siga esta guía paso a paso para testear la seguridad de la API:
 ### Usuarios de prueba:
 
 * **Administrador**: `ana@administrador.cl` / `Biblio@2026`
-* **Bibliotecario**: `beatriz@bibliotecario.cl` / `Biblio@2026`
+* **Nikerio**: `beatriz@nikerio.cl` / `Biblio@2026`
 * **Cliente**: `carlos@cliente.cl` / `Biblio@2026`
 
 ### Paso 1: Intentar acceder sin credenciales (401)
@@ -15597,7 +15597,7 @@ Siga esta guía paso a paso para testear la seguridad de la API:
 
 1. Con el mismo token del usuario "Cliente", intente realizar una operación no permitida para él, por ejemplo, **DELETE** a `http://localhost:9002/api/v1/libros/1`.
 2. Vaya a Authorization -> Bearer Token y use el token del Cliente.
-3. Envíe la petición. Debería recibir un error `403 Forbidden`, porque solo los Administradores y Bibliotecarios pueden borrar libros.
+3. Envíe la petición. Debería recibir un error `403 Forbidden`, porque solo los Administradores y Nikerios pueden borrar libros.
 4. Si repite este paso utilizando el token de la cuenta de "Ana" (Administrador), la operación de eliminación sería exitosa (o devolvería un 404 si el ID no existe, pero nunca un 403).
 
 ## 7. Buenas Prácticas de Seguridad Implementadas (y Recomendadas)
@@ -15625,7 +15625,7 @@ Siga esta guía paso a paso para testear la seguridad de la API:
 
 # Guía de Desarrollo: Implementación de Seguridad JWT
 
-Esta guía secuencial detalla cómo transformar el código base de la plataforma "Biblioteca-Kafka" para incorporar autenticación y autorización mediante JSON Web Tokens (JWT) y Spring Security.
+Esta guía secuencial detalla cómo transformar el código base de la plataforma "Nike-Kafka" para incorporar autenticación y autorización mediante JSON Web Tokens (JWT) y Spring Security.
 
 ## Etapa 1: Comprender la Arquitectura de Seguridad
 
@@ -15635,7 +15635,7 @@ Antes de escribir código, debemos comprender dos conceptos fundamentales:
 
 **Matriz de Permisos del Sistema:**
 - **Cliente:** Sólo puede leer datos (libros, recursos).
-- **Bibliotecario:** Puede leer y modificar datos del catálogo y recursos (pero no usuarios).
+- **Nikerio:** Puede leer y modificar datos del catálogo y recursos (pero no usuarios).
 - **Administrador:** Control total sobre todos los microservicios.
 
 ---
@@ -15644,7 +15644,7 @@ Antes de escribir código, debemos comprender dos conceptos fundamentales:
 
 ¿Por qué? Necesitamos librerías para manejar criptografía (Spring Security) y generación/validación de tokens (JJWT).
 
-**Paso 2.1: Actualizar el archivo `pom.xml` padre (`c:\32-biblioteca-kafka\pom.xml`)**
+**Paso 2.1: Actualizar el archivo `pom.xml` padre (`c:\32-nike-kafka\pom.xml`)**
 Defina las versiones globales. Agregue dentro del bloque `<properties>`:
 ```xml
 <jjwt.version>0.12.6</jjwt.version>
@@ -15667,7 +15667,7 @@ Y dentro de `<dependencyManagement><dependencies>`:
 <!-- ... (repetir para jjwt-impl y jjwt-jackson) ... -->
 ```
 
-**Paso 2.2: Actualizar `common/pom.xml` (`c:\32-biblioteca-kafka\common\pom.xml`)**
+**Paso 2.2: Actualizar `common/pom.xml` (`c:\32-nike-kafka\common\pom.xml`)**
 Como todo microservicio depende de `common`, añadir aquí las dependencias garantiza que se propaguen.
 Agregue en `<dependencies>`:
 ```xml
@@ -15746,7 +15746,7 @@ jwt:
 ## Etapa 5: Configurar `ms-catalogo` como Servidor de Recursos
 
 **Paso 5.1: Configuración de Seguridad**
-Cree `SecurityConfig.java`. La estructura es similar, excepto que no se habilitan rutas `/auth`. Solo permita accesos públicos en `/actuator/**` y asigne reglas de escritura a los roles "Administrador" y "Bibliotecario".
+Cree `SecurityConfig.java`. La estructura es similar, excepto que no se habilitan rutas `/auth`. Solo permita accesos públicos en `/actuator/**` y asigne reglas de escritura a los roles "Administrador" y "Nikerio".
 
 **Paso 5.2: Variables de entorno YAML**
 Copie estrictamente el mismo bloque `jwt` configurado en `ms-usuarios` dentro de `application.yml` en `ms-catalogo`. Sin la misma clave secreta, las firmas fallarán al verificar.
@@ -15765,7 +15765,7 @@ Repita el mismo procedimiento ejecutado en la Etapa 5, adaptando las rutas `/api
 Dado que las contraseñas antiguas estaban en texto plano y hemos migrado, las validaciones fallarán irremediablemente.
 
 **Paso 7.1: Archivo SQL Inicial**
-Edite `c:\32-biblioteca-kafka\init-multi-db\01-usuarios.sql`.
+Edite `c:\32-nike-kafka\init-multi-db\01-usuarios.sql`.
 *   Cambie la definición de la tabla: `password VARCHAR(255) NOT NULL,`
 *   Actualice todos los `INSERT` de la contraseña `'Biblio@2026'` por su equivalencia segura con BCrypt (ej: `$2b$10$...`).
 
@@ -15794,7 +15794,7 @@ Finalmente, en Postman (tal como se indica en la guía de seguridad `SEGURIDAD-J
 
 # Documentación con Swagger (SpringDoc OpenAPI)
 
-Este documento explica qué es Swagger, cómo funciona dentro de un proyecto Spring Boot y cómo está implementado en el sistema Biblioteca de Nike.
+Este documento explica qué es Swagger, cómo funciona dentro de un proyecto Spring Boot y cómo está implementado en el sistema Nike de Nike.
 
 ---
 
@@ -15825,7 +15825,7 @@ Sin Swagger, documentar una API implica mantener un archivo separado (Word, PDF,
 
 ---
 
-## 2. Arquitectura en el proyecto Biblioteca
+## 2. Arquitectura en el proyecto Nike
 
 SpringDoc OpenAPI está integrado en **tres capas** del proyecto:
 
@@ -16271,7 +16271,7 @@ content = @Content(
 /* ARCHIVO: .\docs\04-Implementación-HATEOAS.md */
 /* ============================================================ */
 
-# Reporte: Implementación de HATEOAS en Biblioteca
+# Reporte: Implementación de HATEOAS en Nike
 
 ## ¿Qué es HATEOAS y para qué sirve aquí?
 
@@ -16384,7 +16384,7 @@ content = @Content(
 
 # API Gateway - Manual de Implementación y Uso
 
-## Proyecto Biblioteca de Nike
+## Proyecto Nike de Nike
 
 ---
 
@@ -16497,7 +16497,7 @@ El cliente solo necesita conocer una dirección: `http://localhost:9000`.
 **Propósito:** Archivo Maven del nuevo módulo API Gateway.
 
 **Decisiones de diseño:**
-- Hereda del POM padre (`cl.nike:biblioteca`) para reutilizar las versiones de Spring Boot 3.5.14 y Spring Cloud 2025.0.0.
+- Hereda del POM padre (`cl.nike:nike`) para reutilizar las versiones de Spring Boot 3.5.14 y Spring Cloud 2025.0.0.
 - Utiliza `spring-cloud-starter-gateway` (reactivo/WebFlux) en lugar de `spring-cloud-starter-gateway-mvc` porque:
   - Es la implementación estándar y más madura de Spring Cloud Gateway.
   - Ofrece mejor rendimiento para un proxy/router gracias a su modelo de I/O no bloqueante.
@@ -16517,7 +16517,7 @@ El cliente solo necesita conocer una dirección: `http://localhost:9000`.
 
 ---
 
-#### `api-gateway/src/main/java/cl/nike/gateway/BibliotecaGatewayApplication.java`
+#### `api-gateway/src/main/java/cl/nike/gateway/NikeGatewayApplication.java`
 **Propósito:** Clase principal de la aplicación Spring Boot del gateway.
 
 **Anotaciones:**
@@ -16624,14 +16624,14 @@ Petición 4 → ms-catalogo:9012
 
 ### Paso 1: Iniciar la infraestructura (Docker)
 ```bash
-cd c:\50-biblioteca-gateway
+cd c:\50-nike-gateway
 docker-compose up -d
 ```
 Esto inicia PostgreSQL (puerto 5433) y Kafka (puerto 9092).
 
 ### Paso 2: Compilar todo el proyecto (incluye el nuevo módulo gateway)
 ```bash
-cd c:\50-biblioteca-gateway
+cd c:\50-nike-gateway
 mvn clean install -DskipTests
 ```
 
@@ -16707,7 +16707,7 @@ mvn -f ms-usuarios spring-boot:run -Dspring-boot.run.arguments="--server.port=90
 
 ### Configuración Inicial
 
-1. Crear una nueva **Colección** en Postman llamada "Biblioteca - API Gateway".
+1. Crear una nueva **Colección** en Postman llamada "Nike - API Gateway".
 2. Crear una variable de colección `gateway_url` con valor `http://localhost:9000`.
 3. Crear una variable de colección `token` (se llenará después del login).
 
@@ -16719,7 +16719,7 @@ Content-Type: application/json
 
 Body (raw JSON):
 {
-    "email": "admin@biblioteca.cl",
+    "email": "admin@nike.cl",
     "password": "admin123"
 }
 ```
@@ -18384,7 +18384,7 @@ docker exec postgres-rdbms psql -U postgres -d main_postgres_db -f /docker-entry
 /* ARCHIVO: .\init-multi-db\docker_install_biblio.bat */
 /* ============================================================ */
 
-docker run --name postgres-db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=123 -e POSTGRES_DB=biblioteca -p 5433:5432 -d postgres
+docker run --name postgres-db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=123 -e POSTGRES_DB=nike -p 5433:5432 -d postgres
 
 /* ============================================================ */
 /* ARCHIVO: .\init-multi-db\docker_remove_biblio.bat */
@@ -18762,15 +18762,15 @@ public class Securityconfig {
 
               
                 .requestMatchers(HttpMethod.GET, "/api/v1/categorias/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 
                 .requestMatchers(HttpMethod.POST, "/api/v1/categorias/**")
-                    .hasAnyRole("Administrador", "Bibliotecario")
+                    .hasAnyRole("Administrador", "Nikerio")
                 .requestMatchers(HttpMethod.PUT, "/api/v1/categorias/**")
-                    .hasAnyRole("Administrador", "Bibliotecario")
+                    .hasAnyRole("Administrador", "Nikerio")
                 .requestMatchers(HttpMethod.DELETE, "/api/v1/categorias/**")
-                    .hasAnyRole("Administrador", "Bibliotecario")
+                    .hasAnyRole("Administrador", "Nikerio")
 
                 .anyRequest().authenticated()
             )
@@ -19687,7 +19687,7 @@ spring:
 # para que los tokens generados por ms-usuarios sean válidos en
 # ms-categoria.
 # Para dar el valor al "secret" trasformaremos la frase clave (inventada) 
-# "tokenSecretKeyBiblioteca2026NikeSecurity" a formato Base64
+# "tokenSecretKeyNike2026NikeSecurity" a formato Base64
 jwt:
   secret: "dG9rZW5TZWNyZXRLZXlCaWJsaW90ZWNhMjAyNlRyaXNrZWxlZHVTZWN1cml0eQ=="
   expiration-ms: 3600000
@@ -19843,7 +19843,7 @@ spring:
 # para que los tokens generados por ms-usuarios sean válidos en
 # ms-categoria.
 # Para dar el valor al "secret" trasformaremos la frase clave (inventada) 
-# "tokenSecretKeyBiblioteca2026NikeSecurity" a formato Base64
+# "tokenSecretKeyNike2026NikeSecurity" a formato Base64
 jwt:
   secret: "dG9rZW5TZWNyZXRLZXlCaWJsaW90ZWNhMjAyNlRyaXNrZWxlZHVTZWN1cml0eQ=="
   expiration-ms: 3600000
@@ -21190,7 +21190,7 @@ public class LoginResponse {
     /** Nombre completo del usuario */
     private String nombre;
 
-    /** Rol del usuario (Administrador, Bibliotecario, Cliente) */
+    /** Rol del usuario (Administrador, Nikerio, Cliente) */
     private String rol;
 
     /** Tiempo de expiración del token en milisegundos */
@@ -21902,7 +21902,7 @@ spring:
 # para que los tokens generados por ms-usuarios sean válidos en
 # ms-catalogo, ms-cliente y ms-recursos.
 # Para dar el valor al "secret" trasformaremos la frase clave (inventada) 
-# "tokenSecretKeyBiblioteca2026NikeSecurity" a formato Base64
+# "tokenSecretKeyNike2026NikeSecurity" a formato Base64
 jwt:
   secret: "dG9rZW5TZWNyZXRLZXlCaWJsaW90ZWNhMjAyNlRyaXNrZWxlZHVTZWN1cml0eQ=="
   expiration-ms: 3600000
@@ -22072,7 +22072,7 @@ spring:
 # para que los tokens generados por ms-usuarios sean válidos en
 # ms-catalogo, ms-cliente y ms-recursos.
 # Para dar el valor al "secret" trasformaremos la frase clave (inventada) 
-# "tokenSecretKeyBiblioteca2026NikeSecurity" a formato Base64
+# "tokenSecretKeyNike2026NikeSecurity" a formato Base64
 jwt:
   secret: "dG9rZW5TZWNyZXRLZXlCaWJsaW90ZWNhMjAyNlRyaXNrZWxlZHVTZWN1cml0eQ=="
   expiration-ms: 3600000
@@ -22826,7 +22826,7 @@ public class Securityconfig {
 
                 // Historial/Detalle de compras: visible por cualquier rol autenticado
                 .requestMatchers(HttpMethod.GET, "/api/v1/compras/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Generar una compra: típicamente Clientes y Administradores
                 .requestMatchers(HttpMethod.POST, "/api/v1/compras/**")
@@ -24458,7 +24458,7 @@ public class Securityconfig {
 
                 // Consulta de detalles de venta: Accesible por todos los roles autenticados
                 .requestMatchers(HttpMethod.GET, "/api/v1/detallevta/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Registro de detalles de venta: Típicamente por Administradores o Clientes al comprar
                 .requestMatchers(HttpMethod.POST, "/api/v1/detallevta/**")
@@ -25979,7 +25979,7 @@ import lombok.RequiredArgsConstructor;
  * │ Endpoint                         │ Método │ Acceso                                         │
  * ├──────────────────────────────────┼────────┼────────────────────────────────────────────────┤
  * │ /actuator/** │ ALL    │ Público (monitoreo)                            │
- * │ /api/v1/marcas/** │ GET    │ Administrador, Bibliotecario, Cliente          │
+ * │ /api/v1/marcas/** │ GET    │ Administrador, Nikerio, Cliente          │
  * │ /api/v1/marcas/** │ POST   │ Administrador                                  │
  * │ Cualquier otro                   │ ALL    │ Autenticado (con token válido)                 │
  * └──────────────────────────────────┴────────┴────────────────────────────────────────────────┘
@@ -26017,7 +26017,7 @@ public class SecurityConfig {
 
                 // Consulta de marcas: Accesible por todos los roles autenticados (catálogo)
                 .requestMatchers(HttpMethod.GET, "/api/v1/marcas/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Modificaciones, creación y eliminación restringidas únicamente al rol Administrador
                 .requestMatchers(HttpMethod.POST, "/api/v1/marcas/**")
@@ -26187,7 +26187,7 @@ public class Securityconfig {
 
                 // Listar o ver marcas: Accesible por cualquier usuario autenticado (Clientes, Administradores, etc.)
                 .requestMatchers(HttpMethod.GET, "/api/v1/marcas/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Mantenedores de Marcas (Crear, Modificar, Eliminar): Exclusivo Administradores
                 .requestMatchers(HttpMethod.POST, "/api/v1/marcas/**").hasAnyRole("Administrador")
@@ -27792,7 +27792,7 @@ public class Securityconfig {
 
                 // Consulta de modelos: Accesible por todos los roles autenticados
                 .requestMatchers(HttpMethod.GET, "/api/v1/modelos/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Modificaciones, creación y eliminación restringidas únicamente al rol Administrador
                 .requestMatchers(HttpMethod.POST, "/api/v1/modelos/**").hasAnyRole("Administrador")
@@ -29378,7 +29378,7 @@ public class Securityconfig {
 
                 // Consulta de proveedores: Accesible por todos los roles autenticados
                 .requestMatchers(HttpMethod.GET, "/api/v1/proveedores/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Modificaciones, registro y eliminación restringidos únicamente al rol Administrador
                 .requestMatchers(HttpMethod.POST, "/api/v1/proveedores/**").hasAnyRole("Administrador")
@@ -31011,7 +31011,7 @@ public class Securityconfig {
 
                 // Consulta de vendedores: Accesible por todos los roles autenticados
                 .requestMatchers(HttpMethod.GET, "/api/v1/vendedores/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Modificaciones, registro y eliminación restringidos únicamente al rol Administrador
                 .requestMatchers(HttpMethod.POST, "/api/v1/vendedores/**").hasAnyRole("Administrador")
@@ -31943,7 +31943,7 @@ spring:
 # para que los tokens generados por ms-usuarios sean válidos en
 # ms-catalogo, ms-vendedor y ms-recursos.
 # Para dar el valor al "secret" trasformaremos la frase clave (inventada) 
-# "tokenSecretKeyBiblioteca2026NikeSecurity" a formato Base64
+# "tokenSecretKeyNike2026NikeSecurity" a formato Base64
 jwt:
   secret: "dG9rZW5TZWNyZXRLZXlCaWJsaW90ZWNhMjAyNlRyaXNrZWxlZHVTZWN1cml0eQ=="
   expiration-ms: 3600000
@@ -32113,7 +32113,7 @@ spring:
 # para que los tokens generados por ms-usuarios sean válidos en
 # ms-catalogo, ms-vendedor y ms-recursos.
 # Para dar el valor al "secret" trasformaremos la frase clave (inventada) 
-# "tokenSecretKeyBiblioteca2026NikeSecurity" a formato Base64
+# "tokenSecretKeyNike2026NikeSecurity" a formato Base64
 jwt:
   secret: "dG9rZW5TZWNyZXRLZXlCaWJsaW90ZWNhMjAyNlRyaXNrZWxlZHVTZWN1cml0eQ=="
   expiration-ms: 3600000
@@ -32854,7 +32854,7 @@ public class Securityconfig {
 
                 // Historial o consulta de ventas: Accesible por los roles correspondientes
                 .requestMatchers(HttpMethod.GET, "/api/v1/ventas/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Generar una venta (Checkout): Permitido para Clientes y Administradores
                 .requestMatchers(HttpMethod.POST, "/api/v1/ventas/**")
@@ -34569,7 +34569,7 @@ public class Securityconfig {
 
                 // Consulta de zapatillas/catálogo: Accesible por todos los roles autenticados
                 .requestMatchers(HttpMethod.GET, "/api/v1/zapatillas/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Modificaciones del catálogo (Crear, Actualizar, Eliminar) restringidos al Administrador
                 .requestMatchers(HttpMethod.POST, "/api/v1/zapatillas/**").hasAnyRole("Administrador")

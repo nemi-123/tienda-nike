@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * Clase principal del API Gateway del proyecto Biblioteca de Nike.
+ * Clase principal del API Gateway del proyecto Nike de Nike.
  *
  * Esta aplicación actúa como punto de entrada único (Single Entry Point) para
  * todos los microservicios del sistema. Todas las peticiones de los clientes
@@ -30,10 +30,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient  // Habilita el registro y descubrimiento de servicios en Eureka Server
-public class tiendaGatewayApplication {
+public class TiendaGatewayApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(tiendaGatewayApplication.class, args);
+        SpringApplication.run(TiendaGatewayApplication.class, args);
     }
 
 }

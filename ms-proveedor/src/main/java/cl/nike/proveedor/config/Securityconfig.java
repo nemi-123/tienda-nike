@@ -50,7 +50,7 @@ public class Securityconfig {
 
                 // Consulta de proveedores: Accesible por todos los roles autenticados
                 .requestMatchers(HttpMethod.GET, "/api/v1/proveedores/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Modificaciones, registro y eliminación restringidos únicamente al rol Administrador
                 .requestMatchers(HttpMethod.POST, "/api/v1/proveedores/**").hasAnyRole("Administrador")

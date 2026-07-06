@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
  * │ Endpoint                         │ Método │ Acceso                                         │
  * ├──────────────────────────────────┼────────┼────────────────────────────────────────────────┤
  * │ /actuator/** │ ALL    │ Público (monitoreo)                            │
- * │ /api/v1/marcas/** │ GET    │ Administrador, Bibliotecario, Cliente          │
+ * │ /api/v1/marcas/** │ GET    │ Administrador, Nikerio, Cliente          │
  * │ /api/v1/marcas/** │ POST   │ Administrador                                  │
  * │ Cualquier otro                   │ ALL    │ Autenticado (con token válido)                 │
  * └──────────────────────────────────┴────────┴────────────────────────────────────────────────┘
@@ -64,7 +64,7 @@ public class SecurityConfig {
 
                 // Consulta de marcas: Accesible por todos los roles autenticados (catálogo)
                 .requestMatchers(HttpMethod.GET, "/api/v1/marcas/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Modificaciones, creación y eliminación restringidas únicamente al rol Administrador
                 .requestMatchers(HttpMethod.POST, "/api/v1/marcas/**")

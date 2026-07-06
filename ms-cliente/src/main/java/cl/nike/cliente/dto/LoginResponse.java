@@ -24,7 +24,7 @@ public class LoginResponse {
     /** Nombre completo del usuario */
     private String nombre;
 
-    /** Rol del usuario (Administrador, Bibliotecario, Cliente) */
+    /** Rol del usuario (Administrador, Nikerio, Cliente) */
     private String rol;
 
     /** Tiempo de expiración del token en milisegundos */

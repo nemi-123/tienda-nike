@@ -21,7 +21,7 @@ spring:
 # para que los tokens generados por ms-usuarios sean válidos en
 # ms-categoria.
 # Para dar el valor al "secret" trasformaremos la frase clave (inventada) 
-# "tokenSecretKeyBiblioteca2026NikeSecurity" a formato Base64
+# "tokenSecretKeyNike2026NikeSecurity" a formato Base64
 jwt:
   secret: "dG9rZW5TZWNyZXRLZXlCaWJsaW90ZWNhMjAyNlRyaXNrZWxlZHVTZWN1cml0eQ=="
   expiration-ms: 3600000

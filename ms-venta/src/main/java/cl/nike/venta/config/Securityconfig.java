@@ -50,7 +50,7 @@ public class Securityconfig {
 
                 // Historial o consulta de ventas: Accesible por los roles correspondientes
                 .requestMatchers(HttpMethod.GET, "/api/v1/ventas/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 // Generar una venta (Checkout): Permitido para Clientes y Administradores
                 .requestMatchers(HttpMethod.POST, "/api/v1/ventas/**")

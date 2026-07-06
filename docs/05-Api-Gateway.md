@@ -1,6 +1,6 @@
 # API Gateway - Manual de Implementación y Uso
 
-## Proyecto Biblioteca de Nike
+## Proyecto Nike de Nike
 
 ---
 
@@ -113,7 +113,7 @@ El cliente solo necesita conocer una dirección: `http://localhost:9000`.
 **Propósito:** Archivo Maven del nuevo módulo API Gateway.
 
 **Decisiones de diseño:**
-- Hereda del POM padre (`cl.nike:biblioteca`) para reutilizar las versiones de Spring Boot 3.5.14 y Spring Cloud 2025.0.0.
+- Hereda del POM padre (`cl.nike:nike`) para reutilizar las versiones de Spring Boot 3.5.14 y Spring Cloud 2025.0.0.
 - Utiliza `spring-cloud-starter-gateway` (reactivo/WebFlux) en lugar de `spring-cloud-starter-gateway-mvc` porque:
   - Es la implementación estándar y más madura de Spring Cloud Gateway.
   - Ofrece mejor rendimiento para un proxy/router gracias a su modelo de I/O no bloqueante.
@@ -133,7 +133,7 @@ El cliente solo necesita conocer una dirección: `http://localhost:9000`.
 
 ---
 
-#### `api-gateway/src/main/java/cl/nike/gateway/BibliotecaGatewayApplication.java`
+#### `api-gateway/src/main/java/cl/nike/gateway/TiendaGatewayApplication.java`
 **Propósito:** Clase principal de la aplicación Spring Boot del gateway.
 
 **Anotaciones:**
@@ -240,14 +240,14 @@ Petición 4 → ms-catalogo:9012
 
 ### Paso 1: Iniciar la infraestructura (Docker)
 ```bash
-cd c:\50-biblioteca-gateway
+cd c:\50-nike-gateway
 docker-compose up -d
 ```
 Esto inicia PostgreSQL (puerto 5433) y Kafka (puerto 9092).
 
 ### Paso 2: Compilar todo el proyecto (incluye el nuevo módulo gateway)
 ```bash
-cd c:\50-biblioteca-gateway
+cd c:\50-nike-gateway
 mvn clean install -DskipTests
 ```
 
@@ -323,7 +323,7 @@ mvn -f ms-usuarios spring-boot:run -Dspring-boot.run.arguments="--server.port=90
 
 ### Configuración Inicial
 
-1. Crear una nueva **Colección** en Postman llamada "Biblioteca - API Gateway".
+1. Crear una nueva **Colección** en Postman llamada "Nike - API Gateway".
 2. Crear una variable de colección `gateway_url` con valor `http://localhost:9000`.
 3. Crear una variable de colección `token` (se llenará después del login).
 
@@ -335,7 +335,7 @@ Content-Type: application/json
 
 Body (raw JSON):
 {
-    "email": "admin@biblioteca.cl",
+    "email": "admin@nike.cl",
     "password": "admin123"
 }
 ```

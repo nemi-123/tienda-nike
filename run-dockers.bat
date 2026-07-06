@@ -14,21 +14,21 @@ echo         Contenedores y volumenes anteriores eliminados.
 echo.
 
 rem Paso 2: Compilar todos los JARs con Maven
-echo [2/5] COMPILANDO PROYECTO JAVA CON MAVEN...
-echo         (common, eureka, api-gateway, ms-categoria, ms-cliente, ms-compra, ms-detallevta, ms-marca, ms-modelo, ms-proveedor, ms-vendedor, ms-venta, ms-zapatilla) 
-echo.
-call mvn clean package -DskipTests --no-transfer-progress
-if %ERRORLEVEL% NEQ 0 (
-    echo.
-    echo ****************************************************
-    echo ERROR: La compilacion Maven fallo.
-    echo Revisa los errores arriba y corrige antes de reintentar.
-    echo ****************************************************
-    pause
-    exit /b 1
-)
-echo         Compilacion exitosa. JARs generados.
-echo.
+rem echo [2/5] COMPILANDO PROYECTO JAVA CON MAVEN...
+rem echo         (common, eureka, api-gateway, ms-categoria, ms-cliente, ms-compra, ms-detallevta, ms-marca, ms-modelo, ms-proveedor, ms-vendedor, ms-venta, ms-zapatilla) 
+rem echo.
+rem call mvn clean package -DskipTests --no-transfer-progress
+rem if %ERRORLEVEL% NEQ 0 (
+rem     echo.
+rem     echo ****************************************************
+rem     echo ERROR: La compilacion Maven fallo.
+rem     echo Revisa los errores arriba y corrige antes de reintentar.
+rem     echo ****************************************************
+rem     pause
+rem     exit /b 1
+rem )
+rem echo         Compilacion exitosa. JARs generados.
+rem echo.
 
 rem Paso 3: Levantar Base de Datos y Mensajeria
 echo [3/5] INICIANDO POSTGRES Y KAFKA...
@@ -89,7 +89,7 @@ echo   PostgreSQL:     localhost:5433
 echo   -----------------------------------------------
 echo.
 echo   Pruebas con Postman:
-echo   Importar: postman\3-Biblioteca-API.postman_collection_dockers.json
+echo   Importar: postman\3-Nike-API.postman_collection_dockers.json
 echo   1. Ejecutar "Login - Administrador"
 echo   2. Probar endpoints de Libros, Usuarios, Recursos
 echo.

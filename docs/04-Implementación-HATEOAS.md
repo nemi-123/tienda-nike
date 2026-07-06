@@ -1,4 +1,4 @@
-# Reporte: Implementación de HATEOAS en Biblioteca
+# Reporte: Implementación de HATEOAS en Nike
 
 ## ¿Qué es HATEOAS y para qué sirve aquí?
 

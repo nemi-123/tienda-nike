@@ -1,6 +1,6 @@
 # Implementación de Seguridad con JWT
 
-Este documento detalla la implementación de seguridad basada en JSON Web Tokens (JWT) en el proyecto Biblioteca-Kafka.
+Este documento detalla la implementación de seguridad basada en JSON Web Tokens (JWT) en el proyecto Nike-Kafka.
 
 ## 1. Introducción a JWT
 
@@ -106,8 +106,8 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/actuator/**").permitAll()
-            .requestMatchers(HttpMethod.GET, "/api/v1/libros/**").hasAnyRole("Administrador", "Bibliotecario", "Cliente")
-            .requestMatchers(HttpMethod.POST, "/api/v1/libros/**").hasAnyRole("Administrador", "Bibliotecario")
+            .requestMatchers(HttpMethod.GET, "/api/v1/libros/**").hasAnyRole("Administrador", "Nikerio", "Cliente")
+            .requestMatchers(HttpMethod.POST, "/api/v1/libros/**").hasAnyRole("Administrador", "Nikerio")
             // ... otras reglas ...
             .anyRequest().authenticated()
         )
@@ -192,13 +192,13 @@ jwt:
 | Microservicio   | Endpoint                         | Método HTTP      | Roles Permitidos                      |
 | :-------------- | :------------------------------- | :---------------- | :------------------------------------ |
 | `ms-usuarios` | `/api/v1/auth/**`              | ALL               | Público (Todos)                      |
-| `ms-usuarios` | `/api/v1/usuarios/**`          | GET               | Administrador, Bibliotecario          |
+| `ms-usuarios` | `/api/v1/usuarios/**`          | GET               | Administrador, Nikerio          |
 | `ms-usuarios` | `/api/v1/usuarios/**`          | POST, PUT, DELETE | Administrador                         |
-| `ms-catalogo` | `/api/v1/libros/**`            | GET               | Administrador, Bibliotecario, Cliente |
-| `ms-catalogo` | `/api/v1/libros/**`            | POST, PUT, DELETE | Administrador, Bibliotecario          |
-| `ms-recursos` | `/api/v1/recursos/**`          | GET               | Administrador, Bibliotecario, Cliente |
-| `ms-recursos` | `/api/v1/recursos/**`          | POST, PUT, DELETE | Administrador, Bibliotecario          |
-| `ms-recursos` | `/api/v1/libros-proyeccion/**` | GET               | Administrador, Bibliotecario, Cliente |
+| `ms-catalogo` | `/api/v1/libros/**`            | GET               | Administrador, Nikerio, Cliente |
+| `ms-catalogo` | `/api/v1/libros/**`            | POST, PUT, DELETE | Administrador, Nikerio          |
+| `ms-recursos` | `/api/v1/recursos/**`          | GET               | Administrador, Nikerio, Cliente |
+| `ms-recursos` | `/api/v1/recursos/**`          | POST, PUT, DELETE | Administrador, Nikerio          |
+| `ms-recursos` | `/api/v1/libros-proyeccion/**` | GET               | Administrador, Nikerio, Cliente |
 | Todos           | `/actuator/**`                 | ALL               | Público (Monitoreo)                  |
 
 ## 6. Cómo probar con Postman
@@ -208,7 +208,7 @@ Siga esta guía paso a paso para testear la seguridad de la API:
 ### Usuarios de prueba:
 
 * **Administrador**: `ana@administrador.cl` / `Biblio@2026`
-* **Bibliotecario**: `beatriz@bibliotecario.cl` / `Biblio@2026`
+* **Nikerio**: `beatriz@nikerio.cl` / `Biblio@2026`
 * **Cliente**: `carlos@cliente.cl` / `Biblio@2026`
 
 ### Paso 1: Intentar acceder sin credenciales (401)
@@ -243,7 +243,7 @@ Siga esta guía paso a paso para testear la seguridad de la API:
 
 1. Con el mismo token del usuario "Cliente", intente realizar una operación no permitida para él, por ejemplo, **DELETE** a `http://localhost:9002/api/v1/libros/1`.
 2. Vaya a Authorization -> Bearer Token y use el token del Cliente.
-3. Envíe la petición. Debería recibir un error `403 Forbidden`, porque solo los Administradores y Bibliotecarios pueden borrar libros.
+3. Envíe la petición. Debería recibir un error `403 Forbidden`, porque solo los Administradores y Nikerios pueden borrar libros.
 4. Si repite este paso utilizando el token de la cuenta de "Ana" (Administrador), la operación de eliminación sería exitosa (o devolvería un 404 si el ID no existe, pero nunca un 403).
 
 ## 7. Buenas Prácticas de Seguridad Implementadas (y Recomendadas)

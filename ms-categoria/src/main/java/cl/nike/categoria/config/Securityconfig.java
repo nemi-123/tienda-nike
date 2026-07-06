@@ -51,15 +51,15 @@ public class Securityconfig {
 
               
                 .requestMatchers(HttpMethod.GET, "/api/v1/categorias/**")
-                    .hasAnyRole("Administrador", "Bibliotecario", "Cliente")
+                    .hasAnyRole("Administrador", "Nikerio", "Cliente")
 
                 
                 .requestMatchers(HttpMethod.POST, "/api/v1/categorias/**")
-                    .hasAnyRole("Administrador", "Bibliotecario")
+                    .hasAnyRole("Administrador", "Nikerio")
                 .requestMatchers(HttpMethod.PUT, "/api/v1/categorias/**")
-                    .hasAnyRole("Administrador", "Bibliotecario")
+                    .hasAnyRole("Administrador", "Nikerio")
                 .requestMatchers(HttpMethod.DELETE, "/api/v1/categorias/**")
-                    .hasAnyRole("Administrador", "Bibliotecario")
+                    .hasAnyRole("Administrador", "Nikerio")
 
                 .anyRequest().authenticated()
             )

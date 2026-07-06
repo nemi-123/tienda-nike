@@ -1,6 +1,6 @@
 # Documentación con Swagger (SpringDoc OpenAPI)
 
-Este documento explica qué es Swagger, cómo funciona dentro de un proyecto Spring Boot y cómo está implementado en el sistema Biblioteca de Nike.
+Este documento explica qué es Swagger, cómo funciona dentro de un proyecto Spring Boot y cómo está implementado en el sistema Nike de Nike.
 
 ---
 
@@ -31,7 +31,7 @@ Sin Swagger, documentar una API implica mantener un archivo separado (Word, PDF,
 
 ---
 
-## 2. Arquitectura en el proyecto Biblioteca
+## 2. Arquitectura en el proyecto Nike
 
 SpringDoc OpenAPI está integrado en **tres capas** del proyecto:
 

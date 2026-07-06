@@ -5,7 +5,7 @@ setlocal
 cls
 echo.
 echo ============================================
-echo   Biblioteca - MENU PRINCIPAL
+echo   Nike - MENU PRINCIPAL
 echo ============================================
 echo.
 echo   [1] Iniciar todos los servicios (dev)

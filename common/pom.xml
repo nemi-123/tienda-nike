@@ -14,7 +14,7 @@
     </parent>
 
     <groupId>cl.nike</groupId>
-    <artifactId>cl.nike-common</artifactId>
+    <artifactId>cl-nike-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <name>Modulo Common</name>

@@ -27,8 +27,7 @@
         <!-- SE AGREGA LA DEPENDENCIA CENTRALIZADA COMMON -->
         <dependency>
             <groupId>cl.nike</groupId>
-            <artifactId>cl.nike-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <artifactId>cl-nike-common</artifactId>
         </dependency>
 
         <dependency>

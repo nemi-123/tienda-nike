@@ -156,7 +156,7 @@
 
             <dependency>
                 <groupId>cl.nike</groupId>
-                <artifactId>common</artifactId>
+                <artifactId>cl-nike-common</artifactId>
                 <version>${common.version}</version>
             </dependency>
 

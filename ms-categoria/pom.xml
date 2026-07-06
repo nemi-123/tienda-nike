@@ -26,7 +26,7 @@
 
         <dependency>
             <groupId>cl.nike</groupId>
-            <artifactId>cl.nike-common</artifactId>
+            <artifactId>cl-nike-common</artifactId>
         </dependency>
 
         <dependency>

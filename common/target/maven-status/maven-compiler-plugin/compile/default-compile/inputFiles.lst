@@ -1,5 +1,6 @@
 D:\tienda\common\src\main\java\cl\nike\common\event\LibroEvent.java
 D:\tienda\common\src\main\java\cl\nike\common\security\JwtProperties.java
+D:\tienda\common\src\main\java\cl\nike\common\server\InstanceHeaderFilter.java
 D:\tienda\common\src\main\java\cl\nike\common\config\OpenApiConfig.java
 D:\tienda\common\src\main\java\cl\nike\common\exception\GlobalExceptionHandler.java
 D:\tienda\common\src\main\java\cl\nike\common\security\FeignClientInterceptor.java
@@ -12,4 +13,5 @@ D:\tienda\common\src\main\java\cl\nike\common\exception\ReferentialIntegrityExce
 D:\tienda\common\src\main\java\cl\nike\common\exception\EntityNotFoundException.java
 D:\tienda\common\src\main\java\cl\nike\common\security\JwtAuthenticationFilter.java
 D:\tienda\common\src\main\java\cl\nike\common\event\LibroUpdatedEvent.java
+D:\tienda\common\src\main\java\cl\nike\common\server\InstanceHeaderAutoConfiguration.java
 D:\tienda\common\src\main\java\cl\nike\common\event\LibroDeletedEvent.java

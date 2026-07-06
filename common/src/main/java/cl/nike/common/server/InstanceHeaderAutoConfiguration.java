@@ -1,4 +1,4 @@
-package cl.triskeledu.common.server;
+package cl.nike.common.server;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

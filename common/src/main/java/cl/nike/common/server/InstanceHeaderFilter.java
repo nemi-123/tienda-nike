@@ -1,4 +1,4 @@
-package cl.triskeledu.common.server;
+package cl.nike.common.server;
 
 import java.io.IOException;
 

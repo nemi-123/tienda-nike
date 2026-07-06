@@ -12,8 +12,10 @@ cl\nike\common\event\LibroCreatedEvent.class
 cl\nike\common\event\LibroEvent.class
 cl\nike\common\security\JwtProperties.class
 cl\nike\common\security\JwtAuthenticationFilter.class
+cl\nike\common\server\InstanceHeaderAutoConfiguration.class
 cl\nike\common\exception\ApiError.class
 cl\nike\common\exception\DuplicateResourceException.class
 cl\nike\common\exception\ReferentialIntegrityException.class
 cl\nike\common\exception\EntityNotFoundException.class
 cl\nike\common\security\JwtTokenProvider.class
+cl\nike\common\server\InstanceHeaderFilter.class

@@ -15,9 +15,9 @@ import java.util.Objects;
 public class Zapatilla {
 
     @Id
-    @Column(name = "idzapatilla", nullable = false)
+    @Column(name = "idzapatilla")
     private BigDecimal idzapatilla;
-
+    
     @Column(name = "nombre", nullable = true, length = 50)
     private String nombre;
 

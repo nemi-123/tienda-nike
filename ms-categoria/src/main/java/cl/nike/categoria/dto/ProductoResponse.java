@@ -1,17 +1,22 @@
 package cl.nike.categoria.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import org.springframework.hateoas.RepresentationModel;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductoResponse {
-    // Producto
+@EqualsAndHashCode(callSuper = false)
+public class ProductoResponse extends RepresentationModel<ProductoResponse>  {
+
     private BigDecimal idProducto;
-    private String nombreProducto;
+    private String nombre;
     private BigDecimal precio;
+    private BigDecimal idCategoria;
+
+    private List<CategoriaResponse> categorias; 
 }

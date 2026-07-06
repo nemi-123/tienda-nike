@@ -1,12 +1,8 @@
 package cl.nike.categoria.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -14,14 +10,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TipoRequest {
-        // Tipo
-    @NotNull(message = "El id del tipo es obligatorio")
+
+    @NotNull
     private BigDecimal idTipo;
 
-    @NotBlank(message = "El nombre del tipo es obligatorio")
-    @Size(max = 50, message = "El nombre no puede superar los 50 caracteres")
-    private String nombreTipo;
-
-
-
+    @Size(max = 50)
+    private String nombre;
 }

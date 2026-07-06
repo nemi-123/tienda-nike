@@ -2,25 +2,22 @@ package cl.nike.detallevta.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+import org.springframework.hateoas.RepresentationModel;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DetalleVtaResponse {
+@EqualsAndHashCode(callSuper = false)
+public class DetallevtaResponse extends RepresentationModel<DetallevtaResponse>  {
 
-    // detalleVta
     private BigDecimal idDetalle;
     private BigDecimal cantidad;
     private BigDecimal subtotal;
-    //producto
-    private BigDecimal idProducto;
-    private String nombre;
-    private BigDecimal precio;
-    //veta
     private BigDecimal idVenta;
-    private String fecha;
-    private BigDecimal total;
+    private BigDecimal idProducto;
 }

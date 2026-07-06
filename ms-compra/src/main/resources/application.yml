@@ -1,8 +1,3 @@
-server:
-  port: 9010
-  error:
-    include-stacktrace: never
-
 spring:
   application:
     name: ms-compra
@@ -28,3 +23,18 @@ eureka:
     instance-id: "${spring.application.name}:${random.value}"
     lease-renewal-interval-in-seconds: 15
     lease-expiration-duration-in-seconds: 60
+
+jwt:
+  secret: "dG9rZW5TZWNyZXRLZXlCaWJsaW90ZWNhMjAyNlRyaXNrZWxlZHVTZWN1cml0eQ=="
+  expiration-ms: 3600000   # 1 hora en milisegundos
+
+server:
+  port: 0  # Cambia a 0 si realmente necesitas que sea dinámico
+  error:
+    include-stacktrace: never  # Nunca exponer el stacktrace en la respuesta HTTP
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html

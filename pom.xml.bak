@@ -2,35 +2,23 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <!-- Modelo base de Maven -->
     <modelVersion>4.0.0</modelVersion>
 
-    <!--
-        *******************************************
-        CGV INICIO: PERSONALIZAR PARA CADA PROYECTO
-        *******************************************
-    -->
-
-    <!--
-    Modulos hijos del proyecto.
-    Cada uno es un subproyecto independiente (microservicio o libreria comun).
-    -->
     <modules>
-        <module>eureka</module>      <!-- Servidor Eureka -->
-        <module>ms-marca</module>      <!-- Microservicio marca -->
-        <module>ms-modelo</module>      <!-- Microservicio modelo -->
-        <module>ms-categoria</module>      <!-- Microservicio categoria -->
-        <module>ms-zapatilla</module>      <!-- Microservicio zapatilla -->
-        <module>ms-cliente</module>      <!-- Microservicio cliente -->
-        <module>ms-vendedor</module>      <!-- Microservicio vendedor -->
-        <module>ms-venta</module>      <!-- Microservicio venta -->
-        <module>ms-detallevta</module>      <!-- Microservicio detallevta -->
-        <module>ms-proveedor</module>      <!-- Microservicio proveedor -->
-        <module>ms-compra</module>      <!-- Microservicio compra -->
-        <!-- CGV: Agrega aqui mas modulos segun sea necesario -->
-    </modules>
+        <module>common</module>
+        <module>eureka</module>      
+        <module>ms-marca</module>      
+        <module>ms-modelo</module>      
+        <module>ms-categoria</module>      
+        <module>ms-zapatilla</module>      
+        <module>ms-cliente</module>      
+        <module>ms-vendedor</module>      
+        <module>ms-venta</module>      
+        <module>ms-detallevta</module>      
+        <module>ms-proveedor</module>      
+        <module>ms-compra</module>      
+        </modules>
 
-    <!-- Coordenadas GAV (GroupId, ArtifactId, Version) de mi proyecto padre -->
     <groupId>cl.nike</groupId>
     <artifactId>tienda</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -38,22 +26,12 @@
     <name>Proyecto Padre</name>
     <description>Proyecto padre para la gestion de versiones de todos los microservicios</description>
 
-    <!--
-        *******************************************
-        CGV FIN: PERSONALIZAR PARA CADA PROYECTO
-        *******************************************
-    -->
-
-    <!--
-    Propiedades comunes a todos los modulos.
-    Se reutilizan en todo el proyecto para evitar duplicacion.
-    -->
     <properties>
-        <java.version>21</java.version>                                            <!-- Version de Java a utilizar -->
+        <java.version>21</java.version>                                            
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>3.5.14</spring-boot.version>                        <!-- Version de Spring Boot base para microservicios -->
-        <spring-cloud.version>2025.0.0</spring-cloud.version>                                 <!-- Version de Spring Cloud -->
+        <spring-boot.version>3.5.14</spring-boot.version>                        
+        <spring-cloud.version>2025.0.0</spring-cloud.version>                                 
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <lombok.version>1.18.44</lombok.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
@@ -66,10 +44,21 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-clean-plugin.version>3.3.1</maven-clean-plugin.version>
+        <common.version>0.0.1-SNAPSHOT</common.version>
+        <spring-kafka.version>3.3.5</spring-kafka.version>
+        <spring-boot-actuator.version>3.5.14</spring-boot-actuator.version>
+        <jjwt.version>0.12.6</jjwt.version>
+        <springdoc-openapi.version>2.8.17</springdoc-openapi.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc-openapi.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -87,6 +76,35 @@
                 <scope>import</scope>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
@@ -135,6 +153,18 @@
                 <version>${jakarta.el.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>cl.nike</groupId>
+                <artifactId>common</artifactId>
+                <version>${common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka</artifactId>
+                <version>${spring-kafka.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -173,6 +203,7 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+            
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

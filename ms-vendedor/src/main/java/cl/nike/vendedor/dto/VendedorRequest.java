@@ -1,8 +1,9 @@
 package cl.nike.vendedor.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,18 +15,17 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class VendedorRequest {
 
-    // vendedor
     @NotNull(message = "El id del vendedor es obligatorio")
     private BigDecimal idVendedor;
 
-    @Size(max = 50, message = "El nombre del vendedor no puede superar los 50 caracteres")
-    private String nombreVendedor;
+    @NotBlank(message = "El nombre del vendedor no puede estar vacío")
+    @Size(max = 50, message = "El nombre no puede superar los 50 caracteres")
+    private String nombre;
 
     @NotNull(message = "El sueldo es obligatorio")
+    @PositiveOrZero(message = "El sueldo debe ser un valor positivo o cero")
     private BigDecimal sueldo;
 
-    // sucursal
     @NotNull(message = "El id de la sucursal es obligatorio")
-    private BigDecimal idSucursal;
-
+    private BigDecimal idSucursal; // Relación directa por ID para el Request
 }

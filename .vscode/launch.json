@@ -12,12 +12,23 @@
     },
     {
       "type": "java",
+      "name": "Debug API Gateway",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/api-gateway",
+      "mainClass": "cl.nike.gateway.TiendaGatewayApplication",
+      "projectName": "cl-nike-gateway",
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10900 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false",
+      "preLaunchTask": "Wait for Eureka"
+    },
+    {
+      "type": "java",
       "name": "Debug ms-marca",
       "request": "launch",
       "cwd": "${workspaceFolder}/ms-marca",
       "mainClass": "cl.nike.marca.TiendaMarcaApplication",
       "projectName": "cl-nike-marca",
-      "envFile": "${workspaceFolder}/.env"
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10901 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false",
+      "preLaunchTask": "Wait for Eureka"
     },
     {
       "type": "java",
@@ -26,7 +37,8 @@
       "cwd": "${workspaceFolder}/ms-modelo",
       "mainClass": "cl.nike.modelo.TiendaModeloApplication",
       "projectName": "cl-nike-modelo",
-      "envFile": "${workspaceFolder}/.env"
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10902 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false",
+      "preLaunchTask": "Wait for Eureka"
     },
     {
       "type": "java",
@@ -35,7 +47,8 @@
       "cwd": "${workspaceFolder}/ms-categoria",
       "mainClass": "cl.nike.categoria.TiendaCategoriaApplication",
       "projectName": "cl-nike-categoria",
-      "envFile": "${workspaceFolder}/.env"
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10903 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false",
+      "preLaunchTask": "Wait for Eureka"
     },
     {
       "type": "java",
@@ -44,7 +57,8 @@
       "cwd": "${workspaceFolder}/ms-zapatilla",
       "mainClass": "cl.nike.zapatilla.TiendaZapatillaApplication",
       "projectName": "cl-nike-zapatilla",
-      "envFile": "${workspaceFolder}/.env"
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10904 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false",
+      "preLaunchTask": "Wait for Eureka"
     },
     {
       "type": "java",
@@ -53,7 +67,8 @@
       "cwd": "${workspaceFolder}/ms-cliente",
       "mainClass": "cl.nike.cliente.TiendaClienteApplication",
       "projectName": "cl-nike-cliente",
-      "envFile": "${workspaceFolder}/.env"
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10905 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false",
+      "preLaunchTask": "Wait for Eureka"
     },
     {
       "type": "java",
@@ -62,7 +77,8 @@
       "cwd": "${workspaceFolder}/ms-vendedor",
       "mainClass": "cl.nike.vendedor.TiendaVendedorApplication",
       "projectName": "cl-nike-vendedor",
-      "envFile": "${workspaceFolder}/.env"
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10906 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false",
+      "preLaunchTask": "Wait for Eureka"
     },
     {
       "type": "java",
@@ -71,7 +87,8 @@
       "cwd": "${workspaceFolder}/ms-venta",
       "mainClass": "cl.nike.venta.TiendaVentaApplication",
       "projectName": "cl-nike-venta",
-      "envFile": "${workspaceFolder}/.env"
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10907 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false",
+      "preLaunchTask": "Wait for Eureka"
     },
     {
       "type": "java",
@@ -80,7 +97,8 @@
       "cwd": "${workspaceFolder}/ms-detallevta",
       "mainClass": "cl.nike.detallevta.TiendaDetallevtaApplication",
       "projectName": "cl-nike-detallevta",
-      "envFile": "${workspaceFolder}/.env"
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10908 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false",
+      "preLaunchTask": "Wait for Eureka"
     },
     {
       "type": "java",
@@ -89,7 +107,8 @@
       "cwd": "${workspaceFolder}/ms-proveedor",
       "mainClass": "cl.nike.proveedor.TiendaProveedorApplication",
       "projectName": "cl-nike-proveedor",
-      "envFile": "${workspaceFolder}/.env"
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10909 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false",
+      "preLaunchTask": "Wait for Eureka"
     },
     {
       "type": "java",
@@ -98,7 +117,8 @@
       "cwd": "${workspaceFolder}/ms-compra",
       "mainClass": "cl.nike.compra.TiendaCompraApplication",
       "projectName": "cl-nike-compra",
-      "envFile": "${workspaceFolder}/.env"
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10910 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false",
+      "preLaunchTask": "Wait for Eureka"
     }
   ],
   "compounds": [
@@ -106,6 +126,7 @@
       "name": "Debug All Services",
       "configurations": [
         "Debug Eureka",
+        "Debug API Gateway",
         "Debug ms-marca",
         "Debug ms-modelo",
         "Debug ms-categoria",

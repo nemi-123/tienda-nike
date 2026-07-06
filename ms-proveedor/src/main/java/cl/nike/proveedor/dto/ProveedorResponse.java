@@ -2,27 +2,21 @@ package cl.nike.proveedor.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+import org.springframework.hateoas.RepresentationModel;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProveedorResponse {
+@EqualsAndHashCode(callSuper = false)
+public class ProveedorResponse extends RepresentationModel<ProveedorResponse> {
 
-    // proveedor
     private BigDecimal idProveedor;
-    private String nombreProveedor;
+    private String nombre;
     private String telefono;
-
-    // ciudad
-    private BigDecimal idCiudad;
-    private String nombreCiudad;
-
-    // compra
-    private BigDecimal idCompra;
-    private String fecha;
-    private BigDecimal total;
-
+    private BigDecimal idCiudad; // Retornamos el ID plano para el JSON de salida
 }

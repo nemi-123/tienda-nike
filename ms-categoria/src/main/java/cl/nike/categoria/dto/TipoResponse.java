@@ -1,8 +1,6 @@
 package cl.nike.categoria.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -10,9 +8,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TipoResponse {
-        // Tipo
+
     private BigDecimal idTipo;
-    private String nombreTipo;
-
-
+    private String nombre;
 }

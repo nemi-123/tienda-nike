@@ -2,10 +2,7 @@ package cl.nike.modelo.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -14,22 +11,17 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class ModeloRequest {
 
-    // modelo
     @NotNull(message = "El id del modelo es obligatorio")
     private BigDecimal idModelo;
 
-    @Size(max = 50, message = "El nombre del modelo no puede superar los 50 caracteres")
-    private String nombreModelo;
+    @Size(max = 50)
+    private String nombre;
 
-    @NotNull(message = "El precio es obligatorio")
     private BigDecimal precio;
 
-    // marca
     @NotNull(message = "El id de la marca es obligatorio")
     private BigDecimal idMarca;
 
-    // categoria
     @NotNull(message = "El id de la categoría es obligatorio")
     private BigDecimal idCategoria;
-
 }

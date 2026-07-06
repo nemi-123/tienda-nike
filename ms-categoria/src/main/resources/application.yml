@@ -1,21 +1,48 @@
-server:
-  port: 9003
-  error:
-    include-stacktrace: never
-
+# ============================================================
+# MS-CATEGORIA - Configuración principal (Global)
+# ============================================================
 spring:
   application:
     name: ms-categoria
+  profiles:
+    active: dev
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5433/categoria
     username: postgres
     password: 123
   jpa:
-    hibernate:
-      ddl-auto: update
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+# [JJWT-INI]
+# ── Configuración JWT ──────────────────────────────────────────
+# Esta clave secreta DEBE ser idéntica en todos los microservicios
+# para que los tokens generados por ms-usuarios sean válidos en
+# ms-categoria.
+# Para dar el valor al "secret" trasformaremos la frase clave (inventada) 
+# "tokenSecretKeyBiblioteca2026NikeSecurity" a formato Base64
+jwt:
+  secret: "dG9rZW5TZWNyZXRLZXlCaWJsaW90ZWNhMjAyNlRyaXNrZWxlZHVTZWN1cml0eQ=="
+  expiration-ms: 3600000
+# [JJWT-FIN]
+
+server:
+  # [GATEWAY-INI] 
+  # Al poner "0", el puerto se asignará dinámicamente para evitar conflictos al ejecutar múltiples instancias
+  port: 0
+  # [GATEWAY-FIN]
+  error:
+    include-stacktrace: never
+
+# [SWAGGER-INI] 
+# Configuración de SpringDoc/Swagger UI
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+# [SWAGGER-FIN] 
 
 eureka:
   client:
@@ -28,3 +55,78 @@ eureka:
     instance-id: "${spring.application.name}:${random.value}"
     lease-renewal-interval-in-seconds: 15
     lease-expiration-duration-in-seconds: 60
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+
+info:
+  app:
+    name: ${spring.application.name}
+    version: "@project.version@"
+    description: "Microservicio de gestión de tipos, categorías y productos"
+
+# ════════════════════════════════════════════════════════════
+# PERFIL: Desarrollo
+# ════════════════════════════════════════════════════════════
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+# MOVIDO AQUÍ PARA ASEGURAR QUE SE ACTIVE EN DEV
+logging:
+  level:
+    root: INFO
+    cl.nike: DEBUG                    # <--- Esto activa TODO tu código
+    org.springframework.kafka: INFO
+    org.apache.kafka.clients: WARN
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,env,loggers
+
+# ════════════════════════════════════════════════════════════
+# PERFIL: Producción
+# ════════════════════════════════════════════════════════════
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: ${DB_URL}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+logging:
+  level:
+    root: INFO
+    cl.nike: INFO
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://eureka-server:8761/eureka}

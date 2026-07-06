@@ -19,7 +19,7 @@ public class Ciudad {
     private BigDecimal idCiudad;
 
     @Column(name = "nombre", nullable = true, length = 50)
-    private String nombre;
+    private String nombreCiudad;
 
     @OneToMany(mappedBy = "ciudad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Proveedor> proveedores;

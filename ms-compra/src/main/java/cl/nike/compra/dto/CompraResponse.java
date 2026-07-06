@@ -2,28 +2,21 @@ package cl.nike.compra.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+import org.springframework.hateoas.RepresentationModel;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompraResponse {
+@EqualsAndHashCode(callSuper = false)
+public class CompraResponse extends RepresentationModel<CompraResponse> {
 
-    // compra
     private BigDecimal idCompra;
     private String fecha;
     private BigDecimal total;
-
-    // proveedor
     private BigDecimal idProveedor;
-    private String nombreProveedor;
-    private String telefono;
-
-    // detalle compra
-    private BigDecimal idDetalle;
-    private BigDecimal cantidad;
-    private BigDecimal precio;
-
 }

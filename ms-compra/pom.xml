@@ -7,12 +7,6 @@
     <!-- Modelo base de Maven -->
     <modelVersion>4.0.0</modelVersion>
 
-    <!--
-        *******************************************
-        CGV INICIO: PERSONALIZAR PARA CADA PROYECTO
-        *******************************************
-    -->
-
     <!-- Herencia del proyecto padre que centraliza configuracion, BOM y versiones -->
     <parent>
         <groupId>cl.nike</groupId>
@@ -30,23 +24,36 @@
     <name>Modulo de Compra</name>
     <description>Servicio de Compra.</description>
 
-    <!--
-        *******************************************
-        CGV FIN: PERSONALIZAR PARA CADA PROYECTO
-        *******************************************
-    -->
-
     <!-- Forma de empaquetado es .jar -->
     <packaging>jar</packaging>
 
     <!-- Dependencias necesarias para este microservicio -->
     <dependencies>
 
+        <!-- DEPENDENCIA DEL MÓDULO COMMON RECONCILIADA -->
+        <dependency>
+            <groupId>cl.nike</groupId>
+            <artifactId>cl.nike-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        </dependency>
+
         <!-- Spring Web: Controladores REST -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- [HATEOAS-INI] -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
+        <!-- [HATEOAS-FIN] -->
 
         <!-- Spring JPA: acceso a base de datos con Hibernate -->
         <dependency>

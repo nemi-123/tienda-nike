@@ -3,37 +3,27 @@ package cl.nike.categoria.mapper;
 import cl.nike.categoria.dto.CategoriaRequest;
 import cl.nike.categoria.dto.CategoriaResponse;
 import cl.nike.categoria.model.Categoria;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import java.util.List;
 
-@Component
-public class CategoriaMapper {
+@Mapper(componentModel = "spring")
+public interface CategoriaMapper {
 
-    /**
-     * De Modelo (Base de datos) a DTO de Salida
-     */
-    public CategoriaResponse toResponse(Categoria categoria) {
-        if (categoria == null) {
-            return null;
-        }
-        
-        CategoriaResponse response = new CategoriaResponse();
-        response.setIdCategoria(categoria.getIdCategoria());
-        response.setNombreCategoria(categoria.getNombre()); // Mapea 'nombre' a 'nombreCategoria'
-        return response;
-    }
+    // 1. De Request a Entidad (Para crear)
+    @Mapping(target = "productos", ignore = true)
+    @Mapping(target = "tipo.idTipo", source = "idTipo") // Mapea el número al ID del objeto Tipo
+    Categoria toEntity(CategoriaRequest request);
 
-    /**
-     * De DTO de Entrada a Modelo (Base de datos)
-     */
-    public Categoria toEntity(CategoriaRequest request) {
-        if (request == null) {
-            return null;
-        }
-        
-        return Categoria.builder()
-                .idCategoria(request.getIdCategoria())
-                .nombre(request.getNombreCategoria()) // Mapea 'nombreCategoria' a 'nombre'
-                // 'tipo' y 'productos' se inicializan en null o se manejan en el servicio
-                .build();
-    }
+    // 2. De Entidad a Response (Para mostrar)
+    @Mapping(target = "idTipo", source = "tipo.idTipo") // Extrae el número desde el objeto Tipo
+    CategoriaResponse toResponse(Categoria categoria);
+
+    List<CategoriaResponse> toResponseList(List<Categoria> categorias);
+
+    // 3. De Request a Entidad existente (Para actualizar)
+    @Mapping(target = "productos", ignore = true)
+    @Mapping(target = "tipo", ignore = true)
+    void updateEntity(CategoriaRequest request, @MappingTarget Categoria categoria);
 }

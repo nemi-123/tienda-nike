@@ -2,32 +2,25 @@ package cl.nike.categoria.mapper;
 
 import cl.nike.categoria.dto.ProductoRequest;
 import cl.nike.categoria.dto.ProductoResponse;
+
 import cl.nike.categoria.model.Producto;
-import org.springframework.stereotype.Component;
+import org.mapstruct.*;
 
-@Component
-public class ProductoMapper {
+import java.util.List;
 
-    public ProductoResponse toResponse(Producto producto) {
-        if (producto == null) {
-            return null;
-        }
-        return new ProductoResponse(
-                producto.getIdProducto(),
-                producto.getNombre(), // de nombre a nombreProducto
-                producto.getPrecio()
-        );
-    }
+@Mapper(componentModel = "spring")
+public interface ProductoMapper {
 
-    public Producto toEntity(ProductoRequest request) {
-        if (request == null) {
-            return null;
-        }
-        return Producto.builder()
-                .idProducto(request.getIdProducto())
-                .nombre(request.getNombreProducto()) // de nombreProducto a nombre
-                .precio(request.getPrecio())
-                // La relación 'categoria' se asignará en el Service si viene en el request
-                .build();
-    }
+    @Mapping(target = "idProducto", ignore = true)
+    @Mapping(target = "categoria", ignore = true)
+    Producto toEntity(ProductoRequest request);
+
+    @Mapping(target = "idCategoria", source = "categoria.idCategoria")
+    ProductoResponse toResponse(Producto producto);
+
+    List<ProductoResponse> toResponseList(List<Producto> productos);
+
+    @Mapping(target = "idProducto", ignore = true)
+    @Mapping(target = "categoria", ignore = true)
+    void updateEntity(ProductoRequest request, @MappingTarget Producto producto);
 }

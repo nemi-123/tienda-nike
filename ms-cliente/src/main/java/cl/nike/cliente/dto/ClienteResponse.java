@@ -1,29 +1,22 @@
 package cl.nike.cliente.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+import org.springframework.hateoas.RepresentationModel;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class ClienteResponse {
+@EqualsAndHashCode(callSuper = false)
+public class ClienteResponse  extends RepresentationModel<ClienteResponse> {
 
-    // Ciudad
-    private BigDecimal idCiudad;
-    private String nombreCiudad;
-
-    // Cliente
     private BigDecimal idCliente;
-    private String nombreCliente;
+    private String nombre;
     private String telefono;
-
-    // Compra
-    private BigDecimal idCompra;
-    private String fecha;
-    private BigDecimal total;
+    private BigDecimal idCiudad;
 }

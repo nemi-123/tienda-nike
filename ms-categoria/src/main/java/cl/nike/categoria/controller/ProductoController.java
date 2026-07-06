@@ -3,48 +3,54 @@ package cl.nike.categoria.controller;
 import cl.nike.categoria.dto.ProductoRequest;
 import cl.nike.categoria.dto.ProductoResponse;
 import cl.nike.categoria.service.ProductoService;
+import io.swagger.v3.oas.annotations.Operation; // Importación necesaria
+import io.swagger.v3.oas.annotations.tags.Tag;     // Importación necesaria
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/productos")
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/productos")
+@Tag(name = "Productos", description = "API para la gestión del inventario de productos")
 public class ProductoController {
 
     private final ProductoService productoService;
 
     @GetMapping
-    public ResponseEntity<List<ProductoResponse>> listarTodos() {
-        return ResponseEntity.ok(productoService.listarTodos());
+    @Operation(summary = "Obtener todos los productos", description = "Retorna el catálogo completo de productos disponibles")
+    public ResponseEntity<List<ProductoResponse>> findAll() {
+        return ResponseEntity.ok(productoService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductoResponse> buscarPorId(@PathVariable BigDecimal id) {
-        return ResponseEntity.ok(productoService.buscarPorId(id));
+    @Operation(summary = "Obtener producto por ID", description = "Busca los detalles de un producto específico mediante su ID")
+    public ResponseEntity<ProductoResponse> findById(@PathVariable BigDecimal id) {
+        return ResponseEntity.ok(productoService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<ProductoResponse> crear(@Valid @RequestBody ProductoRequest request) {
-        ProductoResponse nuevoProducto = productoService.crear(request);
-        return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
+    @Operation(summary = "Registrar nuevo producto", description = "Agrega un nuevo producto al inventario del sistema")
+    public ResponseEntity<ProductoResponse> create(@Valid @RequestBody ProductoRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(productoService.create(request));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductoResponse> actualizar(
+    @Operation(summary = "Actualizar producto", description = "Modifica los datos de un producto existente en el sistema")
+    public ResponseEntity<ProductoResponse> update(
             @PathVariable BigDecimal id, 
             @Valid @RequestBody ProductoRequest request) {
-        return ResponseEntity.ok(productoService.actualizar(id, request));
+        return ResponseEntity.ok(productoService.update(id, request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable BigDecimal id) {
-        productoService.eliminar(id);
+    @Operation(summary = "Eliminar producto", description = "Elimina un producto del inventario mediante su ID")
+    public ResponseEntity<Void> deleteById(@PathVariable BigDecimal id) {
+        productoService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -1,11 +1,11 @@
-docker exec -i postgres-db psql -U postgres -d postgres < 01-init.sql
-docker exec -i postgres-db psql -U postgres -d postgres < 02-categoria.sql
-docker exec -i postgres-db psql -U postgres -d postgres < 03-clinte.sql
-docker exec -i postgres-db psql -U postgres -d postgres < 04-compra.sql
-docker exec -i postgres-db psql -U postgres -d postgres < 05-detallevta.sql
-docker exec -i postgres-db psql -U postgres -d postgres < 06-marca.sql
-docker exec -i postgres-db psql -U postgres -d postgres < 07-modelo.sql
-docker exec -i postgres-db psql -U postgres -d postgres < 08-proveedor.sql
-docker exec -i postgres-db psql -U postgres -d postgres < 09-vendedor.sql
-docker exec -i postgres-db psql -U postgres -d postgres < 10-venta.sql
-docker exec -i postgres-db psql -U postgres -d postgres < 11-zapatilla.sql
+docker exec postgres-rdbms psql -U postgres -d main_postgres_db -f /docker-entrypoint-initdb.d/01-init.sql
+docker exec postgres-rdbms psql -U postgres -d main_postgres_db -f /docker-entrypoint-initdb.d/02-categoria.sql
+docker exec postgres-rdbms psql -U postgres -d main_postgres_db -f /docker-entrypoint-initdb.d/03-cliente.sql
+docker exec postgres-rdbms psql -U postgres -d main_postgres_db -f /docker-entrypoint-initdb.d/04-compra.sql
+docker exec postgres-rdbms psql -U postgres -d main_postgres_db -f /docker-entrypoint-initdb.d/05-detallevta.sql
+docker exec postgres-rdbms psql -U postgres -d main_postgres_db -f /docker-entrypoint-initdb.d/06-marca.sql
+docker exec postgres-rdbms psql -U postgres -d main_postgres_db -f /docker-entrypoint-initdb.d/07-modelo.sql
+docker exec postgres-rdbms psql -U postgres -d main_postgres_db -f /docker-entrypoint-initdb.d/08-proveedor.sql
+docker exec postgres-rdbms psql -U postgres -d main_postgres_db -f /docker-entrypoint-initdb.d/09-vendedor.sql
+docker exec postgres-rdbms psql -U postgres -d main_postgres_db -f /docker-entrypoint-initdb.d/10-venta.sql
+docker exec postgres-rdbms psql -U postgres -d main_postgres_db -f /docker-entrypoint-initdb.d/11-zapatilla.sql

@@ -1,1 +1,2 @@
-cl.triskeledu.common.CommonAutoConfiguration
+cl.nike.common.CommonAutoConfiguration
+cl.nike.common.server.InstanceHeaderAutoConfiguration 

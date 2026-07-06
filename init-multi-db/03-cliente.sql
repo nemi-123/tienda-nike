@@ -1,44 +1,86 @@
--- 1) posicionarse en la bd
+/* ============================================================
+   ARCHIVO: 03-cliente.sql
+   Microservicio: clientes
+   Responsabilidad: administrar cuentas de clientes, perfiles, ciudades y compras.
+   Kafka publica eventos ClienteCreado/ClienteActualizado para proyecciones.
+   ============================================================ */
 \c cliente;
 
--- 2) eliminar tablas
-drop table if exists compra;
-drop table if exists cliente;
-drop table if exists ciudad;
+-- 1. ELIMINACIÓN EN JERARQUÍA INVERSA
+DROP TABLE IF EXISTS compracli;
+DROP TABLE IF EXISTS credenciales_clientes;
+DROP TABLE IF EXISTS perfil_clientes;
+DROP TABLE IF EXISTS cliente;
+DROP TABLE IF EXISTS ciudad;
 
--- 3) crear tablas
-
-create table ciudad (
-  id_ciudad numeric primary key,
-  nombre varchar(50)
+-- 2. TABLAS MAESTRAS
+CREATE TABLE ciudad (
+    id_ciudad         SERIAL       PRIMARY KEY,
+    nombre            VARCHAR(150) NOT NULL
 );
 
-create table cliente (
-  id_cliente numeric primary key,
-  nombre varchar(50),
-  telefono varchar(20),
-  id_ciudad numeric,
-  foreign key (id_ciudad) references ciudad(id_ciudad)
+CREATE TABLE cliente (
+    id_cliente        SERIAL       PRIMARY KEY,
+    nombre            VARCHAR(150) NOT NULL,
+    email             VARCHAR(150) UNIQUE NOT NULL,
+    -- [JJWT] Se debe aumentar el tamaño de la password para hashes BCrypt
+    password          VARCHAR(255) NOT NULL,
+    id_ciudad         INT          NOT NULL REFERENCES ciudad(id_ciudad) ON DELETE CASCADE,
+    activo            BOOLEAN      DEFAULT TRUE
 );
 
-create table compracli (
-  id_compra numeric primary key,
-  fecha varchar(10),
-  total numeric,
-  id_cliente numeric,
-  foreign key (id_cliente) references cliente(id_cliente)
+CREATE TABLE perfil_clientes (
+    id                SERIAL       PRIMARY KEY,
+    id_cliente        INT          UNIQUE NOT NULL REFERENCES cliente(id_cliente) ON DELETE CASCADE,
+    telefono          VARCHAR(30),
+    fecha_registro    DATE         NOT NULL DEFAULT CURRENT_DATE
 );
 
--- 4) poblar tablas
+CREATE TABLE credenciales_clientes (
+    id                SERIAL       PRIMARY KEY,
+    id_cliente        INT          UNIQUE NOT NULL REFERENCES cliente(id_cliente) ON DELETE CASCADE,
+    ultimo_acceso     TIMESTAMP,
+    bloqueado         BOOLEAN      NOT NULL DEFAULT FALSE,
+    intentos_fallidos INT          NOT NULL DEFAULT 0 CHECK (intentos_fallidos >= 0)
+);
 
-insert into ciudad values (1, 'santiago');
-insert into ciudad values (2, 'valparaiso');
-insert into ciudad values (3, 'concepcion');
+CREATE TABLE compracli (
+    id_compra         SERIAL       PRIMARY KEY,
+    id_cliente        INT          NOT NULL REFERENCES cliente(id_cliente) ON DELETE CASCADE,
+    fecha             DATE         NOT NULL DEFAULT CURRENT_DATE,
+    total             NUMERIC      NOT NULL CHECK (total >= 0)
+);
 
-insert into cliente values (1, 'juan', '123456789', 1);
-insert into cliente values (2, 'ana', '987654321', 2);
-insert into cliente values (3, 'pedro', '456123789', 3);
+CREATE INDEX idx_cliente_ciudad ON cliente(id_ciudad);
+CREATE INDEX idx_cliente_activo ON cliente(activo);
+CREATE INDEX idx_compracli_cliente ON compracli(id_cliente);
 
-insert into compracli values (1, '01-01-2024', 50000, 1);
-insert into compracli values (2, '05-01-2024', 70000, 2);
-insert into compracli values (3, '10-01-2024', 60000, 3);
+-- 3. DATOS DE PRUEBA
+INSERT INTO ciudad (nombre) VALUES 
+('santiago'),
+('valparaiso'),
+('concepcion');
+
+-- [JJWT-INI] 
+-- La contraseña por defecto fue configurada como 'Biblio@2026' para todos los usuarios, y está almacenada como 
+-- hash (huella digital) utilizando el algoritmo BCrypt (generado con BCryptPasswordEncoder de Spring Security).
+INSERT INTO cliente (nombre, email, password, id_ciudad) VALUES
+('juan',  'juan@cliente.cl',  '$2b$10$1hnbaMR7iTsdn3D0gG5Q8eUw5aSh9O2at2e4u1iAlzdhD6m4dzVZO', 1),
+('ana',   'ana@cliente.cl',   '$2b$10$1hnbaMR7iTsdn3D0gG5Q8eUw5aSh9O2at2e4u1iAlzdhD6m4dzVZO', 2),
+('pedro', 'pedro@cliente.cl', '$2b$10$1hnbaMR7iTsdn3D0gG5Q8eUw5aSh9O2at2e4u1iAlzdhD6m4dzVZO', 3);
+-- [JJWT-FIN]
+
+INSERT INTO perfil_clientes (id_cliente, telefono) VALUES
+(1, '123456789'),
+(2, '987654321'),
+(3, '456123789');
+
+INSERT INTO credenciales_clientes (id_cliente, ultimo_acceso, bloqueado, intentos_fallidos) VALUES
+(1, NOW(), FALSE, 0),
+(2, NOW(), FALSE, 0),
+(3, NULL,  FALSE, 0);
+
+INSERT INTO compracli (id_cliente, fecha, total) VALUES
+(1, '2024-01-01', 50000),
+(2, '2024-01-05', 70000),
+(3, '2024-01-10', 60000);

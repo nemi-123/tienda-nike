@@ -42,7 +42,7 @@ jwt:
 # [JJWT-FIN]
 
 server:
-  port: 0
+  port: 9030
   error:
     include-stacktrace: never
 

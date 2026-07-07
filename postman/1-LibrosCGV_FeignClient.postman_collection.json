@@ -1,0 +1,85 @@
+{
+  "info": {
+    "_postman_id": "974de515-6ae2-4daf-9505-e6a46b6814ae",
+    "name": "TiendaNike_Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create /api/v1/zapatillas",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"sku\": \"NK-AIR-001\",\n    \"nombre\": \"Nike Air Max\",\n    \"marca\": \"Nike\",\n    \"precio\": 120.50,\n    \"talla\": 42\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "http://localhost:9002/api/v1/zapatillas",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9002",
+          "path": ["api", "v1", "zapatillas"]
+        }
+      }
+    },
+    {
+      "name": "Read /api/v1/zapatillas",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:9002/api/v1/zapatillas",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9002",
+          "path": ["api", "v1", "zapatillas"]
+        }
+      }
+    },
+    {
+      "name": "Read /api/v1/zapatillas/{id}",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:9002/api/v1/zapatillas/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9002",
+          "path": ["api", "v1", "zapatillas", "1"]
+        }
+      }
+    },
+    {
+      "name": "Update /api/v1/zapatillas/{id}",
+      "request": {
+        "method": "PUT",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"sku\": \"NK-AIR-001\",\n    \"nombre\": \"Nike Air Max Updated\",\n    \"marca\": \"Nike\",\n    \"precio\": 130.00,\n    \"talla\": 43\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "http://localhost:9002/api/v1/zapatillas/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9002",
+          "path": ["api", "v1", "zapatillas", "1"]
+        }
+      }
+    },
+    {
+      "name": "Delete /api/v1/zapatillas/{id}",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:9002/api/v1/zapatillas/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9002",
+          "path": ["api", "v1", "zapatillas", "1"]
+        }
+      }
+    }
+  ]
+}

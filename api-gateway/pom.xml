@@ -12,10 +12,16 @@
     </parent>
 
     <groupId>cl.nike</groupId>
-    <artifactId>api-gateway</artifactId>
+    <artifactId>cl-nike-gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     
     <name>API Gateway</name>
+    <description>
+        API Gateway del proyecto Biblioteca.
+        Punto de entrada único para todos los microservicios.
+        Utiliza Spring Cloud Gateway (reactivo) con integración a Eureka
+        para descubrimiento de servicios y balanceo de carga automático.
+    </description>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -41,12 +47,6 @@
         </dependency>
     </dependencies>
 
-    <dependency>
-        <groupId>org.springdoc</groupId>
-        <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
-        <version>2.5.0</version>
-    </dependency>
-
     <build>
         <plugins>
             <plugin>
@@ -64,11 +64,6 @@
                 </configuration>
             </plugin>
             
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.5</version>
-            </plugin>
         </plugins>
         
         <resources>
